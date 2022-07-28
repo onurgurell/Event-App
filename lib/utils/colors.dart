@@ -1,0 +1,3 @@
+class MainColors {}
+
+class SplashColors {}

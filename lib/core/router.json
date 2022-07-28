@@ -1,0 +1,40 @@
+{
+    "last_updated": "Sun, 13 Feb 2022 22:28:18 GMT",
+    "routes": [
+        {
+            "file_path": "views/splash/splash_view.dart",
+            "route_name": "splashViewRoute",
+            "view_name": "SplashView"
+        },
+        {
+            "file_path": "views/on_board/on_board_view.dart",
+            "route_name": "on_boardViewRoute",
+            "view_name": "OnBoardView"
+        },
+        {
+            "file_path": "views/home/home_view.dart",
+            "route_name": "homeViewRoute",
+            "view_name": "HomeView"
+        },
+        {
+            "file_path": "views/help/help_view.dart",
+            "route_name": "helpViewRoute",
+            "view_name": "HelpView"
+        },
+        {
+            "file_path": "views/details_page/details_page_view.dart",
+            "route_name": "details_pageViewRoute",
+            "view_name": "DetailsPageView"
+        },
+        {
+            "file_path": "views/profile_page/profile_page_view.dart",
+            "route_name": "profile_pageViewRoute",
+            "view_name": "ProfilePageView"
+        },
+        {
+            "file_path": "views/ticket_page/ticket_page_view.dart",
+            "route_name": "ticket_pageViewRoute",
+            "view_name": "TicketPageView"
+        }
+    ]
+}
