@@ -1,7 +1,9 @@
+import 'package:event_app/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:event_app/core/services/auth.dart';
 import 'package:event_app/views/home/home_view.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/custom_sign_button.dart';
 import '../../widgets/custom_text_area.dart';
 import '../help/text_helper.dart';
@@ -14,52 +16,39 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerPassword = TextEditingController();
-
-  final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: MediaQuery.of(context).size.width * .8,
-        height: MediaQuery.of(context).size.height * .6,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              TextHelper.signIn,
-              style: Theme.of(context).textTheme.headline2,
+    return Consumer<AuthViewModel>(
+      builder: ((context, viewModel, child) => SafeArea(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * .8,
+              height: MediaQuery.of(context).size.height * .6,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  signUpText(context),
+                  getCustomTextArea(
+                    viewModel.registerControllerEmail,
+                    TextHelper.email,
+                  ),
+                  getCustomTextArea(
+                    viewModel.registerControllerPassword,
+                    TextHelper.password,
+                  ),
+                  signInButton(viewModel, context)
+                ],
+              ),
             ),
-            CustomTextArea(
-              controller: _controllerEmail,
-              name: TextHelper.email,
-            ),
-            CustomTextArea(
-              controller: _controllerPassword,
-              name: TextHelper.password,
-            ),
-            CustomSignButton(
-              onTap: () {
-                _authService
-                    .signIn(
-                      _controllerEmail.text,
-                      _controllerPassword.text,
-                    )
-                    .then(
-                      (value) => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => HomeView()),
-                        ),
-                      ),
-                    );
-              },
-              child: Text(TextHelper.signIn),
-            )
-          ],
-        ),
-      ),
+          )),
+    );
+  }
+
+  CustomSignButton signInButton(AuthViewModel viewModel, BuildContext context) {
+    return CustomSignButton(
+      onTap: () {
+        viewModel.signIn(context);
+      },
+      child: const Text(TextHelper.signIn),
     );
   }
 
@@ -70,4 +59,18 @@ class _SignInPageState extends State<SignInPage> {
       snackPosition: SnackPosition.BOTTOM,
     );
   }
+}
+
+Text signUpText(BuildContext context) {
+  return Text(
+    TextHelper.signIn,
+    style: Theme.of(context).textTheme.headline2,
+  );
+}
+
+getCustomTextArea(TextEditingController controller, String name) {
+  return CustomTextArea(
+    controller: controller,
+    name: name,
+  );
 }

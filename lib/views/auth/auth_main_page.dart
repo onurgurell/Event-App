@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:event_app/view_model/register_view_model.dart';
+import 'package:event_app/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 import '../help/text_helper.dart';
 import 'register_page.dart';
@@ -49,7 +49,7 @@ class _AuthMainPageState extends State<AuthMainPage> {
                 ),
                 selectedTab == 0
                     ? ChangeNotifierProvider(
-                        create: (_) => RegisterViewModel(),
+                        create: (_) => AuthViewModel(),
                         child: SignUpView(),
                       )
                     : SignInPage()

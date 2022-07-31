@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:event_app/view_model/register_view_model.dart';
+import 'package:event_app/view_model/auth_view_model.dart';
 import 'package:event_app/views/help/text_helper.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,7 @@ import '../../widgets/custom_text_area.dart';
 class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<RegisterViewModel>(
+    return Consumer<AuthViewModel>(
       builder: (context, viewModel, child) => SafeArea(
         child: Center(
           child: SizedBox(
@@ -19,10 +19,12 @@ class SignUpView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 signUpText(context),
-                getCustomTextArea(viewModel.controllerName, TextHelper.name),
-                getCustomTextArea(viewModel.controllerEmail, TextHelper.email),
                 getCustomTextArea(
-                    viewModel.controllerPassword, TextHelper.password),
+                    viewModel.registerControllerName, TextHelper.name),
+                getCustomTextArea(
+                    viewModel.registerControllerEmail, TextHelper.email),
+                getCustomTextArea(
+                    viewModel.registerControllerPassword, TextHelper.password),
                 signUpButton(viewModel)
               ],
             ),
@@ -39,8 +41,8 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  Widget signUpButton(RegisterViewModel viewModel) {
-    return Consumer<RegisterViewModel>(
+  Widget signUpButton(AuthViewModel viewModel) {
+    return Consumer<AuthViewModel>(
       builder: (context, viewModel, child) => CustomSignButton(
         onTap: () {
           TextHelper.name.length > 3

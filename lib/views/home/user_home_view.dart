@@ -4,7 +4,9 @@ import 'package:event_app/views/help/color_helper.dart';
 import 'package:event_app/widgets/category_list_widget.dart';
 import 'package:event_app/widgets/search_bar.dart';
 import 'package:event_app/widgets/swipper_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
+import '../../view_model/theme_view_model.dart';
 import 'home_view_model.dart';
 
 class UserHomeView extends StatefulWidget {
@@ -21,10 +23,8 @@ class _UserHomeViewState extends State<UserHomeView> {
           appBar: AppBar(
             backgroundColor: ColorHelper.backgroundColor,
             actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 25),
-                child: Icon(Icons.notifications),
-              ),
+              notificiationButton(),
+              changeThemeButtonWidget(),
             ],
           ),
           body: SingleChildScrollView(
@@ -52,6 +52,41 @@ class _UserHomeViewState extends State<UserHomeView> {
         );
       },
       viewModelBuilder: () => HomeViewModel(),
+    );
+  }
+}
+
+class notificiationButton extends StatelessWidget {
+  const notificiationButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.only(right: 25),
+      child: Icon(Icons.notifications),
+    );
+  }
+}
+
+class changeThemeButtonWidget extends StatelessWidget {
+  const changeThemeButtonWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeViewModel>(context);
+    return Padding(
+      padding: const EdgeInsets.only(right: 15),
+      child: Switch.adaptive(
+          value: themeProvider.isDarkMode,
+          onChanged: (value) {
+            final provider =
+                Provider.of<ThemeViewModel>(context, listen: false);
+            provider.changeTheme(value);
+          }),
     );
   }
 }
