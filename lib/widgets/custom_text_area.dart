@@ -10,6 +10,10 @@ class CustomTextArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _textArea();
+  }
+
+  TextField _textArea() {
     return TextField(
       controller: controller,
       decoration: InputDecoration(

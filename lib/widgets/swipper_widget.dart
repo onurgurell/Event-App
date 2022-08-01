@@ -21,28 +21,34 @@ class SwipperWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "Musical Festivals",
-                    style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  _textFestival(),
                   TextButton(onPressed: () {}, child: Text('see all'))
                 ],
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width * .9,
-              height: MediaQuery.of(context).size.height * .4,
-              child: DetailSwipper(
-                events: _events,
-                //eventsName: _eventsName,
-              ),
-            ),
+            _swipperArea(context, _events),
           ],
         ),
       ),
+    );
+  }
+
+  SizedBox _swipperArea(BuildContext context, List<String> _events) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * .9,
+      height: MediaQuery.of(context).size.height * .4,
+      child: DetailSwipper(
+        events: _events,
+        //eventsName: _eventsName,
+      ),
+    );
+  }
+
+  Text _textFestival() {
+    return const Text(
+      "Musical Festivals",
+      style: TextStyle(
+          fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold),
     );
   }
 }

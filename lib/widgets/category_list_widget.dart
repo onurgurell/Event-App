@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/models/categories_list.dart';
-import '../../views/home/home_view_model.dart';
+import '../view_model/home_view_model.dart';
 
 class CategoryWidget extends StatelessWidget {
   final List<String> _category = Categories.categories;
@@ -13,40 +13,47 @@ class CategoryWidget extends StatelessWidget {
       create: (context) => HomeViewModel(),
       child: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) => SafeArea(
-          child: Container(
-            height: MediaQuery.of(context).size.height * .05,
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: _category.length,
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  width: 5,
-                );
-              },
-              itemBuilder: (context, index) {
-                return ChoiceChip(
-                  selectedColor: viewModel.selectedCategory == false
-                      ? Colors.purple
-                      : Colors.grey,
-                  selected: viewModel.selectedCategory,
-                  onSelected: (isSelected) {
-                    viewModel.selectedCategory = isSelected;
-                    // ignore: avoid_print
-                    print(viewModel.selectedCategory);
-                  },
-                  padding: EdgeInsets.all(6),
-                  avatar: CircleAvatar(
-                    backgroundColor: Colors.grey.shade800,
-                  ),
-                  label: Text(
-                    _category[index],
-                  ),
-                );
-              },
-            ),
-          ),
+          child: _chipArea(context, viewModel),
         ),
+      ),
+    );
+  }
+
+  SizedBox _chipArea(BuildContext context, HomeViewModel viewModel) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * .05,
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: _category.length,
+        scrollDirection: Axis.horizontal,
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(
+            width: 5,
+          );
+        },
+        itemBuilder: (context, index) {
+          return _chip(viewModel, index);
+        },
+      ),
+    );
+  }
+
+  ChoiceChip _chip(HomeViewModel viewModel, int index) {
+    return ChoiceChip(
+      selectedColor:
+          viewModel.selectedCategory == false ? Colors.purple : Colors.grey,
+      selected: viewModel.selectedCategory,
+      onSelected: (isSelected) {
+        viewModel.selectedCategory = isSelected;
+        // ignore: avoid_print
+        print(viewModel.selectedCategory);
+      },
+      padding: EdgeInsets.all(6),
+      avatar: CircleAvatar(
+        backgroundColor: Colors.grey.shade800,
+      ),
+      label: Text(
+        _category[index],
       ),
     );
   }

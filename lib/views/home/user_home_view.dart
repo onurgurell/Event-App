@@ -7,7 +7,7 @@ import 'package:event_app/widgets/swipper_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import '../../view_model/theme_view_model.dart';
-import 'home_view_model.dart';
+import '../../view_model/home_view_model.dart';
 
 class UserHomeView extends StatefulWidget {
   @override
