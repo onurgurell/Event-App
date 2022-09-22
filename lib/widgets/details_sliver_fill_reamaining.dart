@@ -15,33 +15,41 @@ class DetailSliverFillRemaining extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Description(),
+            const Description(),
             Gap(),
             Location(),
             const SizedBox(
               height: 15,
             ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                'Interested',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => CircleAvatar(
-                  backgroundImage: NetworkImage(personUrl),
-                ),
-              ),
-            ),
+            _interestedText(),
+            _listImage(personUrl),
             TicketButton(),
           ],
         ),
       ),
     );
+  }
+
+  Expanded _listImage(String personUrl) {
+    return Expanded(
+            child: ListView.builder(
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => CircleAvatar(
+                backgroundImage: NetworkImage(personUrl),
+              ),
+            ),
+          );
+  }
+
+  Container _interestedText() {
+    return Container(
+            alignment: Alignment.topLeft,
+            child: const Text(
+              'Interested',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          );
   }
 }
 

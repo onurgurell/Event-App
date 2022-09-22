@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:event_app/views/home/user_home_view.dart';
 
-import '../details_page/details_page_view.dart';
-import '../profile_page/profile_page_view.dart';
-import '../ticket_page/ticket_page_view.dart';
+import '../views/details_page/details_page_view.dart';
+import '../views/profile_page/profile_page_view.dart';
+import '../views/ticket_page/ticket_page_view.dart';
 
 class HomeViewModel extends ChangeNotifier {
   int _currentTab = 0;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'home_view_model.dart';
+import '../../view_model/home_view_model.dart';
 
 class HomeView extends StatelessWidget {
   final iconList = <IconData>[
