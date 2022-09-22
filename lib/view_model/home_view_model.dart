@@ -8,20 +8,20 @@ import '../views/profile_page/profile_page_view.dart';
 import '../views/ticket_page/ticket_page_view.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  int _currentTab = 0;
+  int _currTab = 0;
   bool _seletcedCategory = false;
 
   final List<Widget> _pages = [
     UserHomeView(),
     ProfilePageView(),
     DetailsPageView(
-      image: '',
+      image: "",
     ),
     TicketPageView(),
   ];
 
   set currentTab(int tab) {
-    this._currentTab = tab;
+    this._currTab = tab;
     notifyListeners();
   }
 
@@ -30,7 +30,7 @@ class HomeViewModel extends ChangeNotifier {
     this._seletcedCategory = isSelected;
   }
 
-  get currentTab => this._currentTab;
-  get pages => this._pages[this._currentTab];
+  get currentTab => this._currTab;
+  get pages => this._pages[this._currTab];
   get selectedCategory => this._seletcedCategory;
 }
